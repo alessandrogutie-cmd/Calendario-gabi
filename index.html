@@ -1,0 +1,746 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>copia de fotmob</title>
+    <style>
+        :root {
+            --fotmob-green: #00875a;
+            --fotmob-dark: #121212;
+            --fotmob-card: #ffffff;
+            --fotmob-bg: #f2f4f7;
+            --text-main: #212529;
+            --text-muted: #6c757d;
+            --border-color: #e0e0e0;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: var(--fotmob-bg);
+            color: var(--text-main);
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            background-color: var(--fotmob-green);
+            color: white;
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 1.4rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 20px auto;
+            padding: 0 15px;
+        }
+
+        .grid-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+
+        @media (max-width: 600px) {
+            .grid-2 { grid-template-columns: 1fr; }
+        }
+
+        .card {
+            background: var(--fotmob-card);
+            border-radius: 8px;
+            padding: 18px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+        }
+
+        h2 {
+            font-size: 1.1rem;
+            color: var(--text-main);
+            margin-top: 0;
+            border-bottom: 2px solid var(--fotmob-bg);
+            padding-bottom: 8px;
+        }
+
+        .form-group {
+            margin-bottom: 12px;
+        }
+
+        label {
+            display: block;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-bottom: 4px;
+            color: var(--text-muted);
+        }
+
+        input, select {
+            width: 100%;
+            padding: 8px 10px;
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            box-sizing: border-box;
+            font-size: 0.9rem;
+            background: #fff;
+        }
+
+        button.btn-primary {
+            background-color: var(--fotmob-green);
+            color: white;
+            border: none;
+            padding: 9px 14px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: bold;
+            width: 100%;
+            font-size: 0.9rem;
+        }
+
+        button.btn-primary:hover { opacity: 0.9; }
+
+        .league-badge {
+            background: #e8f5e9;
+            color: var(--fotmob-green);
+            padding: 6px 12px;
+            border-radius: 4px;
+            font-weight: bold;
+            margin-bottom: 8px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .teams-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+            padding-left: 5px;
+            margin-bottom: 15px;
+        }
+
+        .team-tag {
+            background: #f1f3f5;
+            border: 1px solid #dee2e6;
+            padding: 3px 8px;
+            border-radius: 12px;
+            font-size: 0.8rem;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .match-card {
+            background: white;
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+            padding: 15px;
+            margin-bottom: 12px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+        }
+
+        .match-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: bold;
+            font-size: 1rem;
+            margin-bottom: 10px;
+        }
+
+        .match-status {
+            font-size: 0.75rem;
+            background: #e0e0e0;
+            padding: 2px 6px;
+            border-radius: 10px;
+        }
+
+        .match-status.finished {
+            background: #d4edda;
+            color: #155724;
+        }
+
+        .score-box {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            background: #f8f9fa;
+            padding: 8px;
+            border-radius: 6px;
+            margin-bottom: 10px;
+        }
+
+        .score-box input {
+            width: 45px;
+            text-align: center;
+            font-weight: bold;
+        }
+
+        .teams-grid {
+            display: flex;
+            gap: 10px;
+            margin-top: 10px;
+        }
+
+        .team-column {
+            flex: 1;
+            background: #fafafa;
+            padding: 8px;
+            border-radius: 6px;
+            border: 1px solid #eee;
+        }
+
+        .team-column h5 {
+            margin: 0 0 6px 0;
+            font-size: 0.85rem;
+            color: var(--fotmob-green);
+        }
+
+        ul {
+            margin: 0;
+            padding-left: 15px;
+            font-size: 0.8rem;
+        }
+
+        .add-player-mini {
+            display: flex;
+            gap: 4px;
+            margin-top: 6px;
+        }
+
+        .add-player-mini input {
+            padding: 4px;
+            font-size: 0.8rem;
+        }
+
+        .add-player-mini button {
+            padding: 4px 8px;
+            font-size: 0.8rem;
+            width: auto;
+        }
+
+        .events-box {
+            margin-top: 10px;
+            font-size: 0.8rem;
+            background: #fff;
+            padding: 8px;
+            border: 1px solid #e0e0e0;
+            border-radius: 4px;
+        }
+
+        /* Estilo para el Análisis H2H Detallado */
+        .analysis-box {
+            background: #e3f2fd;
+            border: 1px solid #bbdefb;
+            color: #0d47a1;
+            padding: 12px;
+            border-radius: 6px;
+            margin-top: 12px;
+            font-size: 0.9rem;
+        }
+
+        .analysis-box h4 {
+            margin: 0 0 6px 0;
+            color: #1565c0;
+            font-size: 0.95rem;
+        }
+
+        .no-analysis-box {
+            background: #fff3e0;
+            border: 1px solid #ffe0b2;
+            color: #e65100;
+            padding: 10px;
+            border-radius: 6px;
+            margin-top: 12px;
+            font-size: 0.85rem;
+        }
+
+        .delete-btn {
+            background-color: #dc3545;
+            color: white;
+            border: none;
+            padding: 2px 6px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 0.75rem;
+            width: auto;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>Calendario gabriel's '</h1>
+    <span style="font-size: 0.85rem;" id="storageStatus">💾 Memoria Activa</span>
+</header>
+
+<div class="container">
+
+    <div class="grid-2">
+        <div class="card">
+            <h2>🏆 Apartado 1: Agregar Liga</h2>
+            <form id="leagueForm">
+                <div class="form-group">
+                    <label for="leagueName">Nombre de la Liga / Torneo:</label>
+                    <input type="text" id="leagueName" required placeholder="Ej. Premier League">
+                </div>
+                <button type="submit" class="btn-primary">+ Crear Liga</button>
+            </form>
+        </div>
+
+        <div class="card">
+            <h2>🛡️ Apartado 2: Agregar Equipo</h2>
+            <form id="teamForm">
+                <div class="form-group">
+                    <label for="leagueSelectTeam">Seleccionar Liga Existente:</label>
+                    <select id="leagueSelectTeam" required>
+                        <option value="">-- Elige una Liga --</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="teamName">Nombre del Equipo:</label>
+                    <input type="text" id="teamName" required placeholder="Ej. Real Madrid">
+                </div>
+                <button type="submit" class="btn-primary">+ Añadir Equipo</button>
+            </form>
+        </div>
+    </div>
+
+    <div class="card">
+        <h2>📋 Ligas y Equipos Registrados</h2>
+        <div id="leaguesDirectory"></div>
+    </div>
+
+    <div class="card">
+        <h2>⚽ Programar Nuevo Partido</h2>
+        <form id="matchForm">
+            <div class="form-group">
+                <label for="leagueSelectMatch">Seleccionar Liga:</label>
+                <select id="leagueSelectMatch" required>
+                    <option value="">-- Elige una Liga --</option>
+                </select>
+            </div>
+            <div class="grid-2">
+                <div class="form-group">
+                    <label for="homeTeamSelect">Equipo Local:</label>
+                    <select id="homeTeamSelect" required disabled>
+                        <option value="">-- Selecciona Primero una Liga --</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="awayTeamSelect">Equipo Visitante:</label>
+                    <select id="awayTeamSelect" required disabled>
+                        <option value="">-- Selecciona Primero una Liga --</option>
+                    </select>
+                </div>
+            </div>
+            <button type="submit" class="btn-primary">Crear Partido en la Liga</button>
+        </form>
+    </div>
+
+    <h2>🏟️ Cartelera de Partidos y Análisis H2H</h2>
+    <div id="matchesContainer"></div>
+
+</div>
+
+<script>
+    let leagues = JSON.parse(localStorage.getItem('fotmob_leagues')) || [];
+    let matches = JSON.parse(localStorage.getItem('fotmob_matches')) || [];
+
+    function saveData() {
+        localStorage.setItem('fotmob_leagues', JSON.stringify(leagues));
+        localStorage.setItem('fotmob_matches', JSON.stringify(matches));
+        updateUI();
+    }
+
+    document.getElementById('leagueForm').addEventListener('submit', (e) => {
+        e.preventDefault();
+        const name = document.getElementById('leagueName').value.trim();
+        if (name) {
+            leagues.push({ name: name, teams: [] });
+            saveData();
+            document.getElementById('leagueForm').reset();
+        }
+    });
+
+    document.getElementById('teamForm').addEventListener('submit', (e) => {
+        e.preventDefault();
+        const lIndex = document.getElementById('leagueSelectTeam').value;
+        const teamName = document.getElementById('teamName').value.trim();
+
+        if (lIndex !== "" && teamName) {
+            leagues[lIndex].teams.push({ name: teamName, players: [] });
+            saveData();
+            document.getElementById('teamForm').reset();
+        }
+    });
+
+    const leagueSelectMatch = document.getElementById('leagueSelectMatch');
+    const homeTeamSelect = document.getElementById('homeTeamSelect');
+    const awayTeamSelect = document.getElementById('awayTeamSelect');
+
+    leagueSelectMatch.addEventListener('change', () => {
+        const lIndex = leagueSelectMatch.value;
+        homeTeamSelect.innerHTML = '<option value="">-- Elige Equipo Local --</option>';
+        awayTeamSelect.innerHTML = '<option value="">-- Elige Equipo Visitante --</option>';
+
+        if (lIndex !== "") {
+            homeTeamSelect.disabled = false;
+            awayTeamSelect.disabled = false;
+            leagues[lIndex].teams.forEach((team, tIdx) => {
+                homeTeamSelect.innerHTML += `<option value="${tIdx}">${team.name}</option>`;
+                awayTeamSelect.innerHTML += `<option value="${tIdx}">${team.name}</option>`;
+            });
+        } else {
+            homeTeamSelect.disabled = true;
+            awayTeamSelect.disabled = true;
+        }
+    });
+
+    document.getElementById('matchForm').addEventListener('submit', (e) => {
+        e.preventDefault();
+        const lIndex = leagueSelectMatch.value;
+        const hIdx = homeTeamSelect.value;
+        const aIdx = awayTeamSelect.value;
+
+        if (hIdx === aIdx) {
+            alert('El equipo local y el visitante deben ser diferentes.');
+            return;
+        }
+
+        const leagueName = leagues[lIndex].name;
+        const teamA = leagues[lIndex].teams[hIdx].name;
+        const teamB = leagues[lIndex].teams[aIdx].name;
+
+        matches.push({
+            leagueName: leagueName,
+            teamA: teamA,
+            teamB: teamB,
+            scoreA: '',
+            scoreB: '',
+            isFinished: false,
+            events: []
+        });
+
+        saveData();
+        document.getElementById('matchForm').reset();
+        homeTeamSelect.disabled = true;
+        awayTeamSelect.disabled = true;
+    });
+
+    window.addPlayerToTeam = function(leagueName, teamName, inputId) {
+        const input = document.getElementById(inputId);
+        const playerName = input.value.trim();
+        if (playerName) {
+            leagues.forEach(l => {
+                if (l.name === leagueName) {
+                    l.teams.forEach(t => {
+                        if (t.name === teamName) t.players.push(playerName);
+                    });
+                }
+            });
+            saveData();
+        }
+    }
+
+    window.saveMatchScore = function(index) {
+        const scoreA = document.getElementById(`scoreA-${index}`).value;
+        const scoreB = document.getElementById(`scoreB-${index}`).value;
+
+        if (scoreA !== '' && scoreB !== '') {
+            matches[index].scoreA = scoreA;
+            matches[index].scoreB = scoreB;
+            matches[index].isFinished = true;
+            saveData();
+        } else {
+            alert('Por favor completa ambos goles.');
+        }
+    }
+
+    window.addEvent = function(index) {
+        const scorer = document.getElementById(`scorer-${index}`).value;
+        const assister = document.getElementById(`assister-${index}`).value;
+
+        if (!scorer) {
+            alert('Debes seleccionar al menos un anotador.');
+            return;
+        }
+
+        matches[index].events.push({ scorer, assister: assister || 'Ninguna' });
+        saveData();
+    }
+
+    function getTeamPlayers(leagueName, teamName) {
+        let players = [];
+        leagues.forEach(l => {
+            if (l.name === leagueName) {
+                l.teams.forEach(t => {
+                    if (t.name === teamName) players = t.players;
+                });
+            }
+        });
+        return players;
+    }
+
+    // --- ALGORITMO DE ANÁLISIS HEAD-TO-HEAD (H2H) ---
+    function getH2HAnalysis(teamA, teamB, currentIndex) {
+        // Filtrar partidos finalizados anteriores entre estos mismos equipos
+        const history = matches.filter((m, idx) => {
+            return idx !== currentIndex && m.isFinished &&
+                ((m.teamA.toLowerCase() === teamA.toLowerCase() && m.teamB.toLowerCase() === teamB.toLowerCase()) ||
+                 (m.teamA.toLowerCase() === teamB.toLowerCase() && m.teamB.toLowerCase() === teamA.toLowerCase()));
+        });
+
+        if (history.length === 0) return null;
+
+        let winsA = 0;
+        let winsB = 0;
+        let draws = 0;
+        let totalGoals = 0;
+        let scorersCount = {};
+        let assistersCount = {};
+
+        history.forEach(m => {
+            let sA = 0, sB = 0;
+            // Alinear goles según el orden original del enfrentamiento actual
+            if (m.teamA.toLowerCase() === teamA.toLowerCase()) {
+                sA = parseInt(m.scoreA) || 0;
+                sB = parseInt(m.scoreB) || 0;
+            } else {
+                sA = parseInt(m.scoreB) || 0;
+                sB = parseInt(m.scoreA) || 0;
+            }
+
+            totalGoals += (sA + sB);
+            if (sA > sB) winsA++;
+            else if (sB > sA) winsB++;
+            else draws++;
+
+            // Contabilizar goles y asistencias de los eventos de esos partidos
+            if (m.events) {
+                m.events.forEach(ev => {
+                    if (ev.scorer) {
+                        scorersCount[ev.scorer] = (scorersCount[ev.scorer] || 0) + 1;
+                    }
+                    if (ev.assister && ev.assister !== 'Ninguna') {
+                        assistersCount[ev.assister] = (assistersCount[ev.assister] || 0) + 1;
+                    }
+                });
+            }
+        });
+
+        const totalMatches = history.length;
+        let probA = Math.round((winsA / totalMatches) * 100);
+        let probB = Math.round((winsB / totalMatches) * 100);
+
+        if (probA + probB === 0) {
+            probA = 50; probB = 50;
+        } else if (probA + probB < 100) {
+            let diff = 100 - (probA + probB);
+            probA += Math.round(diff / 2);
+            probB += Math.round(diff / 2);
+        }
+
+        const avgGoals = (totalGoals / totalMatches).toFixed(1);
+
+        // Encontrar jugador con más probabilidades de marcar (según historial H2H)
+        let topScorer = "Sin datos suficientes";
+        let maxGoals = -1;
+        for (let player in scorersCount) {
+            if (scorersCount[player] > maxGoals) {
+                maxGoals = scorersCount[player];
+                topScorer = player;
+            }
+        }
+
+        // Encontrar jugador con más probabilidades de asistir
+        let topAssister = "Sin datos suficientes";
+        let maxAssists = -1;
+        for (let player in assistersCount) {
+            if (assistersCount[player] > maxAssists) {
+                maxAssists = assistersCount[player];
+                topAssister = player;
+            }
+        }
+
+        return {
+            totalMatches,
+            probA,
+            probB,
+            avgGoals,
+            topScorer,
+            topAssister
+        };
+    }
+
+    function updateUI() {
+        const leagueSelectTeam = document.getElementById('leagueSelectTeam');
+        leagueSelectTeam.innerHTML = '<option value="">-- Elige una Liga --</option>';
+        leagueSelectMatch.innerHTML = '<option value="">-- Elige una Liga --</option>';
+
+        leagues.forEach((l, idx) => {
+            leagueSelectTeam.innerHTML += `<option value="${idx}">${l.name}</option>`;
+            leagueSelectMatch.innerHTML += `<option value="${idx}">${l.name}</option>`;
+        });
+
+        const leaguesDirectory = document.getElementById('leaguesDirectory');
+        leaguesDirectory.innerHTML = '';
+
+        if (leagues.length === 0) {
+            leaguesDirectory.innerHTML = '<p style="color:#888; font-size:0.9rem;">No hay ligas agregadas aún.</p>';
+        } else {
+            leagues.forEach((l, lIdx) => {
+                let teamsHTML = l.teams.map((t, tIdx) => `
+                    <span class="team-tag">
+                        🛡️ ${t.name}
+                        <button class="delete-btn" onclick="deleteTeam(${lIdx}, ${tIdx})">x</button>
+                    </span>
+                `).join('') || '<span style="color:#999; font-size:0.8rem;">Sin equipos creados</span>';
+
+                leaguesDirectory.innerHTML += `
+                    <div>
+                        <div class="league-badge">
+                            <span>🏆 ${l.name}</span>
+                            <button class="delete-btn" onclick="deleteLeague(${lIdx})">Eliminar Liga</button>
+                        </div>
+                        <div class="teams-tags">${teamsHTML}</div>
+                    </div>
+                `;
+            });
+        }
+
+        const matchesContainer = document.getElementById('matchesContainer');
+        matchesContainer.innerHTML = '';
+
+        if (matches.length === 0) {
+            matchesContainer.innerHTML = '<div class="card"><p style="text-align:center; color:#777;">No hay partidos programados todavía.</p></div>';
+            return;
+        }
+
+        matches.forEach((m, idx) => {
+            const playersA = getTeamPlayers(m.leagueName, m.teamA);
+            const playersB = getTeamPlayers(m.leagueName, m.teamB);
+
+            const allTeamPlayersOpts = [
+                ...playersA.map(p => `<option value="${p} (${m.teamA})">${p} (${m.teamA})</option>`),
+                ...playersB.map(p => `<option value="${p} (${m.teamB})">${p} (${m.teamB})</option>`)
+            ].join('') || '<option value="">Agrega jugadores abajo</option>';
+
+            const eventsList = m.events.map(ev => `<li>⚽ <strong>${ev.scorer}</strong> (Asist: ${ev.assister})</li>`).join('') || '<li style="color:#777;">Sin goles guardados</li>';
+
+            // Generar análisis H2H basado en duelos previos
+            const h2h = getH2HAnalysis(m.teamA, m.teamB, idx);
+            let analysisHTML = '';
+
+            if (h2h) {
+                analysisHTML = `
+                    <div class="analysis-box">
+                        <h4>📊 Análisis Head-to-Head (${h2h.totalMatches} partido(s) previo(s))</h4>
+                        <p><strong>Probabilidad de Victoria:</strong> ${m.teamA} (${h2h.probA}%) vs ${m.teamB} (${h2h.probB}%)</p>
+                        <p><strong>Promedio de Goles Estimado:</strong> ~${h2h.avgGoals} goles por partido</p>
+                        <p><strong>Jugador con más probabilidad de marcar:</strong> ⚽ ${h2h.topScorer}</p>
+                        <p><strong>Jugador con más probabilidad de asistir:</strong> 🎯 ${h2h.topAssister}</p>
+                    </div>
+                `;
+            } else {
+                analysisHTML = `
+                    <div class="no-analysis-box">
+                        ⚠️ <strong>Sin análisis H2H:</strong> Aún no hay enfrentamientos previos finalizados registrados entre <strong>${m.teamA}</strong> y <strong>${m.teamB}</strong>. Registra el resultado de un partido anterior entre ambos para activar las estadísticas predictivas.
+                    </div>
+                `;
+            }
+
+            matchesContainer.innerHTML += `
+                <div class="match-card">
+                    <div style="font-size:0.8rem; color:var(--fotmob-green); font-weight:bold; margin-bottom:5px;">🏆 ${m.leagueName}</div>
+                    <div class="match-header">
+                        <span>${m.teamA} vs ${m.teamB}</span>
+                        <span class="match-status ${m.isFinished ? 'finished' : ''}">${m.isFinished ? 'Finalizado' : 'Pendiente'}</span>
+                        <button class="delete-btn" onclick="deleteMatch(${idx})">Eliminar</button>
+                    </div>
+
+                    <div class="score-box">
+                        <span>${m.teamA}</span>
+                        <input type="number" id="scoreA-${idx}" value="${m.scoreA}" placeholder="0">
+                        <span>-</span>
+                        <input type="number" id="scoreB-${idx}" value="${m.scoreB}" placeholder="0">
+                        <span>${m.teamB}</span>
+                        <button class="btn-primary" style="width:auto; padding:5px 10px;" onclick="saveMatchScore(${idx})">Guardar Marcador</button>
+                    </div>
+
+                    <div class="teams-grid">
+                        <div class="team-column">
+                            <h5>${m.teamA} (Plantilla)</h5>
+                            <ul>${playersA.map(p=>`<li>${p}</li>`).join('') || '<span style="color:#999;">Sin plantilla</span>'}</ul>
+                            <div class="add-player-mini">
+                                <input type="text" id="pInputA-${idx}" placeholder="Nuevo jugador...">
+                                <button class="btn-primary" onclick="addPlayerToTeam('${m.leagueName}', '${m.teamA}', 'pInputA-${idx}')">+</button>
+                            </div>
+                        </div>
+                        <div class="team-column">
+                            <h5>${m.teamB} (Plantilla)</h5>
+                            <ul>${playersB.map(p=>`<li>${p}</li>`).join('') || '<span style="color:#999;">Sin plantilla</span>'}</ul>
+                            <div class="add-player-mini">
+                                <input type="text" id="pInputB-${idx}" placeholder="Nuevo jugador...">
+                                <button class="btn-primary" onclick="addPlayerToTeam('${m.leagueName}', '${m.teamB}', 'pInputB-${idx}')">+</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="events-box">
+                        <strong>⚽ Registro de Goles y Asistencias:</strong>
+                        <ul>${eventsList}</ul>
+                        <div style="display: flex; gap: 5px; margin-top: 8px;">
+                            <select id="scorer-${idx}" style="font-size:0.8rem;">
+                                <option value="">Anotador</option>
+                                ${allTeamPlayersOpts}
+                            </select>
+                            <select id="assister-${idx}" style="font-size:0.8rem;">
+                                <option value="">Asistente (Opcional)</option>
+                                ${allTeamPlayersOpts}
+                            </select>
+                            <button class="btn-primary" style="width:auto; padding:4px 8px;" onclick="addEvent(${idx})">Añadir Gol</button>
+                        </div>
+                    </div>
+
+                    ${analysisHTML}
+                </div>
+            `;
+        });
+    }
+
+    window.deleteLeague = function(lIdx) {
+        if (confirm('¿Deseas eliminar la liga y sus equipos?')) {
+            leagues.splice(lIdx, 1);
+            saveData();
+        }
+    }
+
+    window.deleteTeam = function(lIdx, tIdx) {
+        leagues[lIdx].teams.splice(tIdx, 1);
+        saveData();
+    }
+
+    window.deleteMatch = function(idx) {
+        if (confirm('¿Deseas eliminar este partido?')) {
+            matches.splice(idx, 1);
+            saveData();
+        }
+    }
+
+    updateUI();
+</script>
+
+</body>
+</html>
